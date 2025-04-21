@@ -1,0 +1,30 @@
+-- text instead of icons in completion menu
+local kind_icons = {
+    Text = "txt",
+    Method = ".m()",
+    Function = "f()",
+    Constructor = "F()",
+    Field = ".x",
+    Variable = "x",
+    Class = "X",
+    Interface = "t",
+    Module = "lib",
+    Property = "prop",
+    Unit = "unit",
+    Value = "val",
+    Enum = "Enum",
+    Keyword = "key",
+    Snippet = "~>",
+    Color = "RGB",
+    File = "file",
+    Reference = "ref",
+    Folder = "dir/",
+    EnumMember = "enum",
+    Constant = "const",
+    Struct = "struct",
+    Event = "event",
+    Operator = "++",
+    TypeParameter = "<>",
+}
+
+return kind_icons
