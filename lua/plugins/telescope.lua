@@ -1,5 +1,9 @@
+-- This file loads:
+--
+-- telescope.nvim
+
 -- Fuzzy finder
-local telescope = {
+return {
     "nvim-telescope/telescope.nvim",
 
     tag = "0.1.5",
@@ -31,5 +35,3 @@ local telescope = {
         })
     end,
 }
-
-return telescope

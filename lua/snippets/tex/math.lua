@@ -5,13 +5,26 @@ local utils = require("snippets.utils")
 
 local brackets = {
     ["p"] = { "(", ")" },
-    ["s"] = { "[", "]" },
-    ["v"] = { "\\lVert", "\\rVert" },
-    ["a"] = { "\\langle", "\\rangle" },
-    ["b"] = { "\\lbrack", "\\rbrack" },
-    ["c"] = { "\\lbrace", "\\rbrace" },
-    ["m"] = { "|", "|" },
+    ["q"] = { "[", "]" },
+    ["n"] = { "\\|", "\\|" },           -- vector norm ||.||
+    ["a"] = { "\\langle", "\\rangle" }, -- <.>
+    ["c"] = { "\\{", "\\}" },           -- {.} (cases)
+    ["m"] = { "|", "|" },               -- absolute value
 }
+
+local brackets_arg = function()
+    return {
+        f(function(_, snip)
+            local cap = snip.captures or {"p", "p"}
+            return brackets[cap[1]][1]
+        end),
+        d(1, utils.get_selection),
+        f(function(_, snip)
+            local cap = snip.captures or {"p", "p"}
+            return brackets[cap[1]][2]
+        end),
+    }
+end
 
 return {
     -- ##################### --
@@ -89,11 +102,11 @@ return {
     ),
 
     -- Complex conjugate
-    s(
-        { trig = ".-", snippetType = "autosnippet", },
-        t([[\conj]]),
-        { condition = tex.in_math }
-    ),
+    -- s(
+    --     { trig = ".-", snippetType = "autosnippet", },
+    --     t([[\conj]]),
+    --     { condition = tex.in_math }
+    -- ),
 
     -- Subset
     s(
@@ -166,6 +179,30 @@ return {
         { condition = tex.in_math }
     ),
 
+    s(
+        { trig = "v,b", wordTrig = false, snippetType = "autosnippet" },
+        fmta([[\braket{<>}{<>}]], { i(1), i(2) }),
+        { condition = tex.in_math }
+    ),
+
+    s(
+        { trig = "b,v", wordTrig = false, snippetType = "autosnippet" },
+        fmta([[\ketbra{<>}{<>}]], { i(1), i(2) }),
+        { condition = tex.in_math }
+    ),
+
+    s(
+        { trig = ",v", wordTrig = false, snippetType = "autosnippet" },
+        fmta([[\bra{<>}]], { i(1) }),
+        { condition = tex.in_math }
+    ),
+
+    s(
+        { trig = ",b", wordTrig = false, snippetType = "autosnippet" },
+        fmta([[\ket{<>}]], { i(1) }),
+        { condition = tex.in_math }
+    ),
+
     -- ########################## --
     -- ## Completable snippets ## --
     -- ########################## --
@@ -174,18 +211,12 @@ return {
     -- e.g.: "lrp" -> "\left( ... \right)"
     s(
         { trig = "lr([psvabcm])", regTrig = true, snippetType = "autosnippet" },
-        fmta([[
-        \left<> <> \right<>
-        ]], {
-            f(function(_, snip)
-                local cap = snip.captures[1] or "p"
-                return brackets[cap][1]
-            end),
-            d(1, utils.get_selection),
-            f(function(_, snip)
-                local cap = snip.captures[1] or "p"
-                return brackets[cap][2]
-            end),
+        c(1, {
+            fmta([[\left<> <> \right<>]], brackets_arg()),
+            fmta([[\bigl<> <> \bigr<>]], brackets_arg()),
+            fmta([[\Bigl<> <> \Bigr<>]], brackets_arg()),
+            fmta([[\biggl<> <> \biggr<>]], brackets_arg()),
+            fmta([[\Biggl<> <> \biggr<>]], brackets_arg()),
         }),
         { condition = tex.in_math }
     ),

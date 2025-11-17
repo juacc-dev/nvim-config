@@ -1,10 +1,14 @@
+-- This file loads:
+--
+-- gruvbox.nvim
+
 -- local function toggle_light_mode()
 --     require("gruvbox").setup({
 --         transparent_mode = false,
 --     })
 -- end
 
-local gruvbox = {
+return {
     "ellisonleao/gruvbox.nvim",
 
     lazy = false,
@@ -69,5 +73,3 @@ local gruvbox = {
         vim.cmd.colorscheme("gruvbox")
     end,
 }
-
-return gruvbox
