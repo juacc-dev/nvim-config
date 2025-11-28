@@ -4,6 +4,7 @@ Snips = {}
 
 local tex = require("snippets.utils.tex")
 
+
 local DEFAULT_CONDITION = (tex.in_text * tex.line_begin)
 
 local envs = {

@@ -4,36 +4,45 @@ local tex = require("snippets.utils.tex")
 -- This shuold be a custom snippet at the root of each project or smth
 return {
     s(
-        { trig = "template", dscr = "Template article", },
+        { trig = "template", dscr = "Quick template", },
         fmta(
             [[
-            \documentclass[<>]{<>}
+            \documentclass[a4paper]{article}
 
-            \title{<>}
-            \author{<>}
-            \date{<>}
+            % Math
+            \usepackage{amsmath}
+            \usepackage{amsfonts}
+            \usepackage{amssymb}
+            \usepackage{cancel}
+            \usepackage{esint} % Closed integrals
+            \usepackage{amsthm} % Theorem-like environments
+            \usepackage{physics}
+            \usepackage{siunitx}
 
-            \input{etc/def/packages.tex}
-            \input{etc/def/commands.tex}
-            \input{etc/overrides.tex}
+            % Silence siunitx warning that shows up when also loading the physics package
+            \AtBeginDocument{\RenewCommandCopy\qty\SI}
+            \ExplSyntaxOn
+            \msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+            \ExplSyntaxOff
+
+            \let\lowdot\d
+            \renewcommand{\d} {\operatorname{d}}
+            % real and imaginary part
+            \let\oldreal\real
+            \renewcommand{\real} {\operatorname{Re}}
+            \newcommand{\imag} {\operatorname{Im}}
+            % complex conjugate
+            \newcommand{\conj} {\ensuremath{^\ast}}
+            % Tal que
+            \newcommand{\tq} {\mathrel{\mathrm{t.q.}}}
 
             \begin{document}
-
-            \maketitle
-            \tableofcontents
 
             <>
 
             \end{document}
             ]],
-            {
-                i(2, "a5paper"),
-                i(1, "article"),
-                i(3),
-                i(4),
-                i(5),
-                i(0),
-            }
+            { i(0) }
         ),
         { condition = tex.in_preamble }
     )

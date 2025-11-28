@@ -52,7 +52,7 @@ return {
 
     -- Vertical space
     s(
-        { trig = ">\\", snippetType = "autosnippet" },
+        { trig = ">S", snippetType = "autosnippet" },
         fmta([[
         \vspace{<>}
         ]], d(1, utils.get_selection)),
