@@ -62,12 +62,4 @@ return {
             condition = tex.in_math,
         }
     ),
-    s("paren_change", {
-        c(1, {
-            sn(nil, d(1, my_func)),
-            sn(nil, { t("("), r(1, "user_text"), t(")") }),
-            sn(nil, { t("["), r(1, "user_text"), t("]") }),
-            sn(nil, { t("{"), r(1, "user_text"), t("}") }),
-        }),
-    } )
 }

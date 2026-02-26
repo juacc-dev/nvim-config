@@ -18,7 +18,7 @@ return {
                 -- A list of parser names, or "all"
                 ensure_installed = {
                     "c", "lua", "python", "bash",
-                    "markdown", "markdown_inline"
+                    "markdown", "markdown_inline",
                 },
 
                 -- Install parsers synchronously (only applied to

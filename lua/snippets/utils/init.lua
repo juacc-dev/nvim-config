@@ -12,9 +12,13 @@ local fmta = require("luasnip.extras.fmt").fmta
 
 M = {}
 
+local function isempty(s) --util 
+    return s == nil or s == ''
+end
+
 -- from pressing `store_selection_keys` on selected text
 function M.get_selection(_, parent)
-    local selected = parent.snippet.env.LS_SELECT_RAW
+    local selected = parent.snippet.env.SELECT_RAW
     if #selected > 0 then
         return sn(nil, i(1, selected))
     else
@@ -23,13 +27,15 @@ function M.get_selection(_, parent)
 end
 
 -- same as before but retaining input
-function M.get_selection_restore(_, parent, _)
-    local selected = parent.snippet.env.LS_SELECT_RAW
-    local restore_key = "selection_restore"
+function M.get_selection_restore(_, parent, _, user_args)
+    local selected = parent.snippet.env.SELECT_RAW
+
+    local restore_key = user_args or "selection_restore"
+
     if #selected > 0 then
-        return sn(1, r(1, restore_key, i(nil, selected)))
+        return sn(nil, r(1, restore_key, i(nil, selected)))
     else
-        return sn(1, r(1, restore_key))
+        return sn(nil, r(1, restore_key))
     end
 end
 

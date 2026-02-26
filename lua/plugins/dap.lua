@@ -142,10 +142,32 @@ return {
 
             config = function()
                 local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
-                require("dap-python").setup(path)
-                table.insert(require('dap').configurations.python, {
+                require('dap').configurations.python = {{
                     justMyCode = false,
-                })
+                    type = "python",
+                    request = "launch",
+                    name = "launch file",
+                    program = "${file}",
+                    args = get_args,
+                    pythonPath = function()
+                        local venv_path = os.getenv("VIRTUAL_ENV")
+                        if venv_path then
+                            return venv_path .. "/bin/python"
+                        end
+                        return "/usr/bin/python3"
+                    end
+                }}
+                require("dap-python").setup(path)
+
+                -- table.insert(require('dap').configurations.python, {
+                --     justMyCode = false,
+                --     type = 'python',
+                --     request = 'launch',
+                --     name = 'My custom launch configuration',
+                --     program = '${file}',
+                --     args = get_args,
+                --     -- ... more options, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
+                -- })
             end
         }
     }

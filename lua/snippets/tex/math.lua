@@ -60,7 +60,7 @@ return {
 
     -- Bold vector
     s(
-        { trig = ".b", snippetType = "autosnippet", },
+        { trig = ".b", wordTrig = false, snippetType = "autosnippet", },
         t([[\veb ]]),
         { condition = tex.in_math }
     ),
@@ -97,6 +97,11 @@ return {
     s(
         { trig = ".d", snippetType = "autosnippet", },
         t([[\dot]]),
+        { condition = tex.in_math }
+    ),
+    s(
+        { trig = "..d", snippetType = "autosnippet", },
+        t([[\ddot]]),
         { condition = tex.in_math }
     ),
 
@@ -152,8 +157,13 @@ return {
 
     -- Cool math typesetting
     s(
-        { trig = ".M", wordTrig = false, snippetType = "autosnippet" },
+        { trig = ":M", wordTrig = false, snippetType = "autosnippet" },
         t([[\mathbb ]]),
+        { condition = tex.in_math }
+    ),
+    s(
+        { trig = ":C", wordTrig = false, snippetType = "autosnippet" },
+        t([[\mathcal ]]),
         { condition = tex.in_math }
     ),
 
@@ -215,11 +225,17 @@ return {
         c(1, {
             fmta([[
             \overbrace{<>}^{<>}
-            ]], { r(1, "content"), r(2, "comment") }),
+            ]], {
+                d(1, utils.get_selection_restore, {}, { user_args = { "content" } }),
+                r(2, "comment")
+            }),
 
             fmta([[
             \overbrace{<>}^\text{<>}
-            ]], { r(1, "content"), r(2, "comment") })
+            ]], {
+                r(1, "content"),
+                r(2, "comment")
+            })
         }),
         { condition = tex.in_math }
     ),
@@ -229,11 +245,17 @@ return {
         c(1, {
             fmta([[
             \underbrace{<>}_{<>}
-            ]], { r(1, "content"), r(2, "comment") }),
+            ]], {
+                d(1, utils.get_selection_restore, {}, { user_args = { "content" } }),
+                r(2, "comment")
+            }),
 
             fmta([[
             \underbrace{<>}_\text{<>}
-            ]], { r(1, "content"), r(2, "comment") })
+            ]], {
+                r(1, "content"),
+                r(2, "comment")
+            })
         }),
         { condition = tex.in_math }
     ),
@@ -241,7 +263,16 @@ return {
     -- Fraction
     s(
         { trig = "//", snippetType = "autosnippet", },
-        fmta([[\frac{<>}{<>}]], { i(1), i(2) }),
+        c(1, {
+            fmta([[\frac{<>}{<>}]], {
+                d(1, utils.get_selection_restore, {}, { user_args = { "keep" } }),
+                i(2)
+            }),
+            fmta([[\frac{<>}{<>}]], { -- invert fraction
+                i(1),
+                r(2, "keep")
+            }),
+        }),
         { condition = tex.in_math }
     ),
 
@@ -250,7 +281,7 @@ return {
         { trig = "__", wordTrig = false, snippetType = "autosnippet", },
         c(1, {
             fmta("_{<>}", { r(1, "r") }),
-            fmta("_\\text{<>}", { r(1, "r") }),
+            fmta([[_\text{<>}]], { r(1, "r") }),
         }),
         { condition = tex.in_math }
     ),
@@ -260,7 +291,7 @@ return {
         { trig = "^^", wordTrig = false, snippetType = "autosnippet", },
         c(1, {
             fmta("^{<>}", { r(1, "r") }),
-            fmta("^\\text{<>}", { r(1, "r") }),
+            fmta([[^\text{<>}]], { r(1, "r") }),
         }),
         { condition = tex.in_math }
     ),
@@ -280,14 +311,14 @@ return {
     -- Square root
     s(
         { trig = "/q", snippetType = "autosnippet" },
-        fmta([[\sqrt{<>}]], i(1)),
+        fmta([[\sqrt{<>}]], d(1, utils.get_selection)),
         { condition = tex.in_math }
     ),
 
     -- Vector norm
     s(
         { trig = "/m", snippetType = "autosnippet" },
-        fmta([[\norm{<>}]], i(1, "\\cdot")),
+        fmta([[\norm{<>}]], d(1, utils.get_selection)),
         { condition = tex.in_math }
     ),
 
@@ -295,8 +326,14 @@ return {
     s(
         { trig = "/d", snippetType = "autosnippet", },
         c(1, {
-            fmta([[\dv{<>}{<>}]], { i(1), r(2, "var", i(nil, "x")) }),
-            fmta([[\dv{<>} ]], { r(1, "var", i(nil, "x")) }),
+            fmta([[\dv{<>}{<>}]], {
+                d(1, utils.get_selection_restore, {}, { user_args = { "f" } }),
+                r(2, "var", i(nil, "x"))
+            }),
+            fmta([[\dv{<>} <>]], {
+                r(1, "var"),
+                r(2, "f")
+            }),
         }),
         { condition = tex.in_math }
     ),
@@ -305,8 +342,16 @@ return {
     s(
         { trig = "/nd", snippetType = "autosnippet", },
         c(1, {
-            fmta([[\dv[<>]{<>}{<>}]], { r(1, "order", i(nil, "2")), i(2), r(3, "var", i(nil, "x")) }),
-            fmta([[\dv[<>]{<>} ]], { r(1, "order", i(nil, "2")), r(2, "var", i(nil, "x")) }),
+            fmta([[\dv[<>]{<>}{<>}]], {
+                r(1, "order", i(nil, "2")),
+                d(2, utils.get_selection_restore, nil, { user_args = { "f" } }),
+                r(3, "var", i(nil, "x"))
+            }),
+            fmta([[\dv[<>]{<>} <>]], {
+                r(1, "order"),
+                r(2, "var"),
+                r(3, "f")
+            }),
         }),
         { condition = tex.in_math }
     ),
@@ -315,8 +360,14 @@ return {
     s(
         { trig = "/sd", snippetType = "autosnippet", },
         c(1, {
-            fmta([[\pdv{<>}{<>}]], { i(1), r(2, "var", i(nil, "x")) }),
-            fmta([[\pdv{<>} ]], { r(1, "var", i(nil, "x")) }),
+            fmta([[\pdv{<>}{<>}]], {
+                d(1, utils.get_selection_restore, {}, { user_args = { "f" } }),
+                r(2, "var", i(nil, "x"))
+            }),
+            fmta([[\pdv{<>} <>]], {
+                r(1, "var"),
+                r(2, "f")
+            }),
         }),
         { condition = tex.in_math }
     ),
@@ -325,18 +376,16 @@ return {
     s(
         { trig = "/nsd", snippetType = "autosnippet", },
         c(1, {
-            fmta([[\pdv[<>]{<>}{<>}]], { r(1, "order", i(nil, "2")), i(2), r(3, "var", i(nil, "x")) }),
-            fmta([[\pdv[<>]{<>} ]], { r(1, "order", i(nil, "2")), r(2, "var", i(nil, "x")) }),
-        }),
-        { condition = tex.in_math }
-    ),
-
-    -- Function definition
-    s(
-        { trig = "/f", },
-        c(1, {
-            fmta([[<>:<>\to <>]], { i(1, "f"), i(2, "\\reals"), i(3, "\\reals") }),
-            fmta([[<>:[a; b]\to <>]], { i(1, "f"), i(2, "\\reals") }),
+            fmta([[\pdv[<>]{<>}{<>}]], {
+                r(1, "order", i(nil, "2")),
+                d(2, utils.get_selection_restore, nil, { user_args = { "f" } }),
+                r(3, "var", i(nil, "x"))
+            }),
+            fmta([[\pdv[<>]{<>} <>]], {
+                r(1, "order"),
+                r(2, "var"),
+                r(3, "f")
+            }),
         }),
         { condition = tex.in_math }
     ),
