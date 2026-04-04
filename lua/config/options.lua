@@ -42,7 +42,7 @@ vim.opt.updatetime = 476
 
 vim.opt.splitbelow = true
 
-vim.g.python3_host_prog = "/usr/bin/python3"
+vim.g.python3_host_prog = "/usr/bin/env python3"
 
 -- Make neovim assume that .h files are C (not C++) headers
 vim.g.c_syntax_for_h = 1

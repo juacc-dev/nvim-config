@@ -1,4 +1,6 @@
+vim.lsp.enable("lua_ls")
 require("config.options")
 require("config.keymaps")
 require("config.autocmd")
+require("config.lsp")
 require("config.plugins")
