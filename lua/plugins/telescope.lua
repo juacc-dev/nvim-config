@@ -1,12 +1,7 @@
--- This file loads:
---
--- telescope.nvim
-
--- Fuzzy finder
 return {
     "nvim-telescope/telescope.nvim",
+    version = "*",
 
-    tag = "0.1.5",
     dependencies = {
         "nvim-lua/plenary.nvim",
     },

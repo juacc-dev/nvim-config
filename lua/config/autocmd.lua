@@ -12,7 +12,7 @@ au("BufWinEnter", {
 au("TextYankPost", {
     desc = "Highlight on yank",
     callback = function()
-        vim.hi.on_yank()
+        vim.highlight.on_yank()
     end,
     group = austuff
 })
