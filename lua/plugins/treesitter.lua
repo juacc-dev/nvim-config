@@ -10,6 +10,7 @@ return {
             "bash",
             "markdown",
             "markdown_inline",
+            "nix",
         }
 
         require("nvim-treesitter").install(parsers)
