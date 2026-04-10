@@ -11,6 +11,7 @@ return {
             "markdown",
             "markdown_inline",
             "nix",
+            "latex"
         }
 
         require("nvim-treesitter").install(parsers)
