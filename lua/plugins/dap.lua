@@ -141,33 +141,21 @@ return {
             },
 
             config = function()
-                local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
-                require('dap').configurations.python = {{
-                    justMyCode = false,
-                    type = "python",
-                    request = "launch",
-                    name = "launch file",
-                    program = "${file}",
-                    args = get_args,
-                    pythonPath = function()
-                        local venv_path = os.getenv("VIRTUAL_ENV")
-                        if venv_path then
-                            return venv_path .. "/bin/python"
-                        end
-                        return "/usr/bin/python3"
-                    end
-                }}
-                require("dap-python").setup(path)
+                -- This requires the python module 'debugpy' to be installed in
+                -- the current environment.
+                -- If in a virtualenv, run `pip install debugpy`. Mayby I could
+                -- automate this some day...
+                require("dap-python").setup("python3")
 
-                -- table.insert(require('dap').configurations.python, {
-                --     justMyCode = false,
-                --     type = 'python',
-                --     request = 'launch',
-                --     name = 'My custom launch configuration',
-                --     program = '${file}',
-                --     args = get_args,
-                --     -- ... more options, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
-                -- })
+                table.insert(require('dap').configurations.python, {
+                    name = 'Jump into libraries',
+                    justMyCode = false,
+                    type = 'python',
+                    request = 'launch',
+                    program = '${file}',
+                    args = get_args,
+                    -- ... more options, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
+                })
             end
         }
     }
