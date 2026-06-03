@@ -2,7 +2,7 @@
 return {
     "preservim/vim-pencil",
 
-    ft = { "markdown", "tex" },
+    ft = { "markdown", "tex", "html" },
 
     config = function()
         -- g options should be set before calling Pencil.

@@ -11,7 +11,8 @@ return {
             "markdown",
             "markdown_inline",
             "nix",
-            "latex"
+            "latex",
+            "ledger",
         }
 
         require("nvim-treesitter").install(parsers)
@@ -20,6 +21,7 @@ return {
             pattern = parsers,
             callback = function()
                 vim.treesitter.start()
+                vim.bo.indentexpr = ""
             end
         })
     end
