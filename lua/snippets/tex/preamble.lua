@@ -25,16 +25,26 @@ return {
             \msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
             \ExplSyntaxOff
 
-            \let\lowdot\d
-            \renewcommand{\d} {\operatorname{d}}
-            % real and imaginary part
+            % Roman numerals in upper case
+            \newcommand{\rom}[1] {\MakeUppercase{\romannumeral #1}}
             \let\oldreal\real
             \renewcommand{\real} {\operatorname{Re}}
             \newcommand{\imag} {\operatorname{Im}}
-            % complex conjugate
             \newcommand{\conj} {\ensuremath{^\ast}}
-            % Tal que
             \newcommand{\tq} {\mathrel{\mathrm{t.q.}}}
+            \newcommand{\veb}[1] {\boldsymbol{#1}}
+            \newcommand{\uvec}[1] {\ensuremath{\boldsymbol{\hat{#1}}}}
+            \newcommand{\ontop}[2]{\stackrel{\mathclap{\normalfont\mbox{#2}}}{#1}}
+            \newcommand{\sub}[1] {\scriptscriptstyle {#1}}
+
+            % Underbrace but with restrained width
+            \newcommand{\unbrace}[2] {
+                \ensuremath{
+                    \underbrace{#1}_{
+                        \parbox{\widthof{$#1$}}{\scriptsize\centering {#2}}
+                    }
+                }
+            }
 
             \begin{document}
 
