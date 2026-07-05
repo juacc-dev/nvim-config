@@ -1,7 +1,3 @@
--- This file loads:
---
--- undotree
-
 -- I used to use vim-mundo
 
 -- Some notes about undotree:

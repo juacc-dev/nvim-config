@@ -7,6 +7,7 @@ local lazy_opts = {
         -- I don't like icons they don't look great alongside bitmap fonts
         icons = require("data.lazy_icons"),
     },
+    rocks = {enabled = false}
 }
 
 -- lazy.nvim plugin manager
