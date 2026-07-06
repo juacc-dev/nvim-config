@@ -1,14 +1,16 @@
 return {
     "lervag/vimtex",
     ft = { "tex" },
-    config = function()
+    lazy = false,
+    init = function()
         vim.g.vimtex_view_method = "zathura"
         vim.g.vimtex_compiler_method = "latexmk"
         vim.g.vimtex_compiler_latexmk = {
             aux_dir = "./.build",
         }
         vim.g.vimtex_compiler_latexmk_engines = {
-            ["_"] = "-xelatex",
+            ["_"] = "-lualatex",
+            ["xelatex"] = "-xelatex",
             ["pdflatex"] = "-pdf",
         }
 
