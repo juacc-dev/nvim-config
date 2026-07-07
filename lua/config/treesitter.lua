@@ -10,7 +10,8 @@ local filetypes = {
     "markdown_inline",
     "vim",
     "vimdoc",
-    "make"
+    "make",
+    "ledger",
 }
 
 -- To fix mapping between parser name 'bash' and  filetype 'sh'

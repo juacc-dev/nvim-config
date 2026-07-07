@@ -1,5 +1,6 @@
 -- Is this too much?
 -- It's definitely not too little.
+-- It takes about the same time to load as the rest of the config
 
 vim.pack.add({
     -- Language server
@@ -53,3 +54,5 @@ require("plugins.gruvbox")
 require("plugins.undotree")
 require("plugins.autopairs")
 require("plugins.telescope")
+require("plugins.ledger")
+require("plugins.vimtex")

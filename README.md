@@ -10,8 +10,7 @@ everything clean and simple.
 ## How my configuration is structured
 
 Main configuration is under `lua/config`, which is all sourced by `init.lua`.
-`lua/plugins` stores code for setting up some plugins. Filetype-specific plugins
-are configured in `after/ftplugin` (more about this directory in `:help ftplugin-overrule`).
+`lua/plugins` stores code for setting up some plugins.
 
 `lua/data/` contains some configuration data for plugins. I sometimes find it a
 slightly pointless.
@@ -21,6 +20,8 @@ powerful snippet engine. I did this with A LOT of help from [TJ
 videos](https://youtu.be/Dn800rlPIho). There is more information about LuaSnip
 in `plugins/cmp.lua` I've tried to not abstract it too much so that it is direct
 and understandable with reasonable knowledge of the plugin.
+
+There is also `after/ftplugin`, which further configures Neovim for specific file types. More about this in `:help ftplugin-overrule`.
 
 
 ## Dependencies
