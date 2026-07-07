@@ -6,11 +6,10 @@ local filetypes = {
     "lua",
     "python",
     "markdown",
-    "sh",
+    "bash",
     "markdown_inline",
     "vim",
     "vimdoc",
-    -- "json",
     "make"
 }
 

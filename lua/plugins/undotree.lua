@@ -11,14 +11,10 @@
 -- > The undo history is sorted by timestamps.
 -- > Saved changes are marked as s and the big S indicates the most recent
 --   saved change.
-return {
-    "mbbill/undotree",
-    lazy = false,
-    keys = { { "<leader>u", vim.cmd.UndotreeToggle }, desc = "Undo tree" },
-    init = function()
-        vim.g.undotree_WindowLayout = 1
-        vim.g.undotree_SplitWidth = 30
-        vim.g.undotree_DiffpanelHeight = 10
-        vim.g.undotree_SetFocusWhenToggle = 1
-    end
-}
+
+vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
+
+vim.g.undotree_WindowLayout = 1
+vim.g.undotree_SplitWidth = 30
+vim.g.undotree_DiffpanelHeight = 10
+vim.g.undotree_SetFocusWhenToggle = 1

@@ -4,39 +4,23 @@ Here is my configuration for [neovim](https://neovim.io/), which I use mostly
 for writing Python, C and LaTeX, among many other things. It is not based on
 any distribution or someone else's config. It's a collection of many things
 that I found or created and tweaked over the years. I try my best to keep
-everything clean.
+everything clean and simple.
+
 
 ## How my configuration is structured
 
-Main configuration is under `lua/config`, which is sourced by `init.lua`
+Main configuration is under `lua/config`, which is all sourced by `init.lua`.
+`lua/plugins` stores code for setting up some plugins. Filetype-specific plugins
+are configured in `after/ftplugin` (more about this directory in `:help ftplugin-overrule`).
 
-The configuration for the plugin manager,
-[Lazy](https://github.com/folke/lazy.nvim), is `lua/config/plugins.lua`. It
-doesn't do much. If Lazy is not already on the system, it doesn't install it
-right away; instad, a keymap (`<leader>P`) is defined for that.
+`lua/data/` contains some configuration data for plugins. I sometimes find it a
+slightly pointless.
 
-Actual plugin specifications and configs are in `lua/plugins/`. I avoid using
-too many of them so that it is easier to maintain. All plugin-related keymaps
-are defined in here.
-
-`lua/data/` contains less functional things that make up for a lot of text that
-either don't really belong in a configuration file or I just prefer to keep
-separated.
-
-There is also `lua/snippets/`, which is is sourced by
-[LuaSnip](https://github.com/L3MON4D3/LuaSnip), a powerful snippet engine. I
-did this with A LOT of help from [TJ videos](https://youtu.be/Dn800rlPIho).
-There is more information about LuaSnip in `plugins/cmp.lua` I've tried to not
-abstract it too much so that it is direct and understandable with reasonable
-knowledge of the plugin.
-
-Files in `after/ftplugin` are overrules for global ftplugins. You can read more
-about this in `:help ftplugin-overrule`.
-
-Each file is basically an autocommand that runs _after_ the corresponding
-global ftplugin, so it doesn't replace it. This is really useful.
-
-There is also `after/lsp`, which holds custom configuration for LSP servers.
+`lua/snippets/` is sourced by [LuaSnip](https://github.com/L3MON4D3/LuaSnip), a
+powerful snippet engine. I did this with A LOT of help from [TJ
+videos](https://youtu.be/Dn800rlPIho). There is more information about LuaSnip
+in `plugins/cmp.lua` I've tried to not abstract it too much so that it is direct
+and understandable with reasonable knowledge of the plugin.
 
 
 ## Dependencies
@@ -52,16 +36,21 @@ There is also `after/lsp`, which holds custom configuration for LSP servers.
 
 Here are the dependencies for my config in no particular order.
 
-- [python-lsp-server](https://github.com/python-lsp/python-lsp-server)
-- [python-ruff](https://github.com/astral-sh/ruff)
+- [python-lsp-server](https://github.com/python-lsp/python-lsp-server) (Python
+  module)
+- [ruff](https://github.com/astral-sh/ruff) (Python module)
 - [texlab](https://github.com/latex-lsp/texlab/)
 - [lua-language-server](https://luals.github.io/)
-- [clangd](https://clangd.llvm.org/) (typically distributed alongside [clang](https://clang.llvm.org/))
-- [python-pynvim](https://github.com/neovim/pynvim) (I don't actually need this)
+- [clangd](https://clangd.llvm.org/) (typically distributed alongside
+  [clang](https://clang.llvm.org/))
 - [Latexmk](https://ctan.org/pkg/latexmk/) and [LuaTeX](https://www.luatex.org/)
-- [TeX Live](https://tug.org/texlive/)... Well, just part of it. At least something that includes `latexmk` and `xelatex` (in Arch Linux this is `texlive-binextra`)
-- [Zathura](https://pwmt.org/projects/zathura/) for viewing compiled LaTeX documents
-- Necessary Tree-sitter parsers, see below.
+  (typically distributed with TeX Live)
+- [Zathura](https://pwmt.org/projects/zathura/) for viewing compiled LaTeX
+  documents
+- Necessary Tree-sitter parsers, see below
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+- [fd](https://github.com/sharkdp/fd)
+- [jsregexp](https://github.com/kmarius/jsregexp) (Lua 5.1 module)
 
 
 ### Tree-sitter
@@ -70,8 +59,8 @@ Here are the dependencies for my config in no particular order.
 straightforward. Here are some notes on how to deal with it.
 
 Neovim needs both a parser _and_ some editor-specific files to have Tree-sitter
-support for a language. The latter are just runtime files, for which an
-enormous collection exists in the
+support for a language. The latter are just runtime files, for which an enormous
+collection exists in the
 [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter/tree/main/runtime/queries)
 repository. These files can simply be copied somewhere like
 `~/.local/share/nvim/site/queries`.

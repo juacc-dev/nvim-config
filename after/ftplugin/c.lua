@@ -1,4 +1,8 @@
-local dap = require("dap")
+-- Debugger configuration for C files
+local ok, dap = pcall(require, "dap")
+if not ok then
+    return
+end
 
 dap.adapters.gdb = {
     type = "executable",

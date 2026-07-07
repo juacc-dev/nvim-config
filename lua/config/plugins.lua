@@ -1,61 +1,55 @@
--- Declare lazy.nvim options before doing anything
-local lazy_opts = {
-    install = {
-        colorscheme = {"default"},
-    },
-    ui = {
-        -- I don't like icons they don't look great alongside bitmap fonts
-        icons = require("data.lazy_icons"),
-    },
-    rocks = {enabled = false}
-}
+-- Is this too much?
+-- It's definitely not too little.
 
--- lazy.nvim plugin manager
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+vim.pack.add({
+    -- Language server
+    "https://github.com/neovim/nvim-lspconfig",
 
--- Check if lazy is installed
-if vim.loop.fs_stat(lazypath) then
-    -- open lazy menu
-    vim.keymap.set("n", "<leader>P", vim.cmd.Lazy)
+    -- Looks
+    "https://github.com/ellisonleao/gruvbox.nvim",
+    "https://github.com/catgoose/nvim-colorizer.lua",
 
-    vim.opt.rtp:prepend(lazypath)
+    -- Completion
+    "https://github.com/hrsh7th/nvim-cmp",
+    "https://github.com/hrsh7th/cmp-nvim-lsp",
+    "https://github.com/hrsh7th/cmp-buffer",
+    "https://github.com/hrsh7th/cmp-path",
+    "https://github.com/hrsh7th/cmp-cmdline",
+    "https://github.com/hrsh7th/cmp-nvim-lua",
 
-    require("lazy").setup("plugins", lazy_opts)
+    -- Snippets
+    "https://github.com/L3MON4D3/LuaSnip",
+    "https://github.com/saadparwaiz1/cmp_luasnip",
 
-    return
-else
-    -- If lazy is not installed don't install it right away,
-    -- you may just not need it right away.
-    function Install_plugins()
-        print("Installing lazy.nvim! Please wait")
+    -- General utilities
+    "https://github.com/mbbill/undotree",
+    "https://github.com/windwp/nvim-autopairs",
+    "https://github.com/numToStr/Comment.nvim",
 
-        vim.fn.system({
-            "git",
-            "clone",
-            "--filter=blob:none",
-            "https://github.com/folke/lazy.nvim.git",
-            "--branch=stable", -- Latest stable release
-            lazypath,
-        })
+    -- Fuzzy finder
+    "https://github.com/nvim-telescope/telescope.nvim",
+    "https://github.com/nvim-lua/plenary.nvim",
 
-        vim.opt.rtp:prepend(lazypath)
-        require("lazy").setup("plugins", lazy_opts)
-    end
+    -- Debugger. This is only loaded for some specific filetypes in
+    -- 'after/ftplugin'.
+    "https://github.com/mfussenegger/nvim-dap",
+    "https://github.com/rcarriga/nvim-dap-ui",
+    "https://github.com/nvim-neotest/nvim-nio", -- asynchronious IO
+    "https://github.com/mfussenegger/nvim-dap-python",
 
-    -- Some highlights for when there is no colorscheme
-    -- i think it doesn't work
-    vim.opt.termguicolors = false
-    vim.cmd([[
-    hi SignColumn NONE
-    hi CursorLine ctermbg=0 cterm=NONE
-    hi CursorLineNr ctermbg=0 cterm=NONE
-    hi StatusLine NONE
-    hi TabLineFill NONE
-    hi TabLineSel NONE
-    ]])
+    -- Filetype-specific (sort of)
+    "https://github.com/lervag/vimtex",        -- LaTeX
+    "https://github.com/preservim/vim-pencil", -- Prose writing
+    "https://github.com/tpope/vim-fugitive",   -- Git
+    "https://github.com/ledger/vim-ledger",    -- ledger and hledger
 
-    -- Same as `:lua install_lazy`_
-    vim.keymap.set("n", "<leader>P", Install_plugins)
+})
 
-    print("<insert>Hello, world!<Esc>:wq<cr> Press \" P\" to install plugins.")
-end
+require("plugins.colorizer")
+require("plugins.luasnip")
+require("plugins.cmp")
+require("plugins.comment")
+require("plugins.gruvbox")
+require("plugins.undotree")
+require("plugins.autopairs")
+require("plugins.telescope")
