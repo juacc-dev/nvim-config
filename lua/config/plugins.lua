@@ -10,6 +10,12 @@ vim.pack.add({
     "https://github.com/ellisonleao/gruvbox.nvim",
     "https://github.com/catgoose/nvim-colorizer.lua",
 
+    -- Filetype-specific (sort of)
+    "https://github.com/lervag/vimtex",        -- LaTeX
+    "https://github.com/preservim/vim-pencil", -- Prose writing
+    "https://github.com/tpope/vim-fugitive",   -- Git
+    "https://github.com/ledger/vim-ledger",    -- ledger and hledger
+
     -- Completion
     "https://github.com/hrsh7th/nvim-cmp",
     "https://github.com/hrsh7th/cmp-nvim-lsp",
@@ -17,15 +23,15 @@ vim.pack.add({
     "https://github.com/hrsh7th/cmp-path",
     "https://github.com/hrsh7th/cmp-cmdline",
     "https://github.com/hrsh7th/cmp-nvim-lua",
+    "https://github.com/saadparwaiz1/cmp_luasnip",
+    "https://github.com/micangl/cmp-vimtex",
 
     -- Snippets
     "https://github.com/L3MON4D3/LuaSnip",
-    "https://github.com/saadparwaiz1/cmp_luasnip",
 
     -- General utilities
     "https://github.com/mbbill/undotree",
     "https://github.com/windwp/nvim-autopairs",
-    "https://github.com/numToStr/Comment.nvim",
 
     -- Fuzzy finder
     "https://github.com/nvim-telescope/telescope.nvim",
@@ -37,22 +43,15 @@ vim.pack.add({
     "https://github.com/rcarriga/nvim-dap-ui",
     "https://github.com/nvim-neotest/nvim-nio", -- asynchronious IO
     "https://github.com/mfussenegger/nvim-dap-python",
-
-    -- Filetype-specific (sort of)
-    "https://github.com/lervag/vimtex",        -- LaTeX
-    "https://github.com/preservim/vim-pencil", -- Prose writing
-    "https://github.com/tpope/vim-fugitive",   -- Git
-    "https://github.com/ledger/vim-ledger",    -- ledger and hledger
-
 })
+
+require("plugins.ledger")
+require("plugins.vimtex")
 
 require("plugins.colorizer")
 require("plugins.luasnip")
 require("plugins.cmp")
-require("plugins.comment")
 require("plugins.gruvbox")
 require("plugins.undotree")
 require("plugins.autopairs")
 require("plugins.telescope")
-require("plugins.ledger")
-require("plugins.vimtex")

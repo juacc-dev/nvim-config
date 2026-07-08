@@ -7,7 +7,7 @@ local brackets = {
     ["n"] = { "\\|", "\\|" },           -- vector norm ||.||
     ["a"] = { "\\langle", "\\rangle" }, -- <.>
     ["c"] = { "\\{", "\\}" },           -- {.} (cases)
-    ["m"] = { "|", "|" },               -- absolute value
+    ["m"] = { "|", "|" },               -- absolute value |.|
 }
 
 -- string containg all keys
@@ -16,10 +16,6 @@ for bracket, _ in pairs(brackets) do
     trig_str = trig_str .. bracket
 end
 
-
-local function my_func(args, _)
-    return sn(nil, {r(1, "the_text", i(nil, "hello there"))})
-end
 
 -- this works but does not retain written text
 local bracket_snip = function(left, right, snip, restore)

@@ -1,3 +1,5 @@
+-- Utilities for LaTeX snippets
+
 -- LuaSnip has condition objects, which you can make with make_condition().
 -- These allow to combine conditions by simple operators like '+' (OR),
 -- '*' (AND), '-' (AND NOT), etc. More info at `:h luasnip-extras-conditions`

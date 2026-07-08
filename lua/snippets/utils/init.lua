@@ -1,3 +1,5 @@
+-- Utilities for working with Luasnip
+
 local ls = require("luasnip")
 local s = ls.snippet
 local sn = ls.snippet_node
@@ -12,9 +14,9 @@ local fmta = require("luasnip.extras.fmt").fmta
 
 M = {}
 
-local function isempty(s) --util 
-    return s == nil or s == ''
-end
+-- local function isempty(s) --util 
+--     return s == nil or s == ''
+-- end
 
 -- from pressing `store_selection_keys` on selected text
 function M.get_selection(_, parent)

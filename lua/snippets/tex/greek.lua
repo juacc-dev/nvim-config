@@ -1,5 +1,6 @@
--- These start with a semicolon. e.g.: ";a" -> "\alpha"
--- Some are repeated so they use an extra semicolon
+-- These start with a semicolon. e.g.: ';a' -> '\alpha'
+-- Some are repeated, so they use an extra semicolon.
+-- e.g.: ';r' -> '\rho', ';;r' -> '\varrho'
 
 Snips = {}
 
@@ -67,7 +68,8 @@ local function make_alph(maps)
 end
 
 -- If I put everything on the same table, triggers with that end the same may
--- get confused. I need to do those that start with an extra semicolon first
+-- get confused. It's important to do those that start with an extra semicolon
+-- first.
 make_alph(extra_alphabet)
 make_alph(alphabet)
 

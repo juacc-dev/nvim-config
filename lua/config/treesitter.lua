@@ -12,6 +12,7 @@ local filetypes = {
     "vimdoc",
     "make",
     "ledger",
+    "nix",
 }
 
 -- To fix mapping between parser name 'bash' and  filetype 'sh'

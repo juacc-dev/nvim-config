@@ -12,7 +12,7 @@
 -- > Saved changes are marked as s and the big S indicates the most recent
 --   saved change.
 
-vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
 
 vim.g.undotree_WindowLayout = 1
 vim.g.undotree_SplitWidth = 30

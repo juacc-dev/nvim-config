@@ -1,4 +1,5 @@
--- Environents are those in \begin{env} ... \end{env} These snippets start with an equals sign. e.g.: "=e" -> "equation"
+-- Environents are those in \begin{env} ... \end{env} These snippets start with
+-- an equals sign. e.g.: "=e" -> "equation"
 
 Snips = {}
 
@@ -12,17 +13,18 @@ local envs = {
     ["e"] = { env = "equation"  },
     ["d"] = { env = "displaymath" },
     ["g"] = { env = "gather*" },
+    ["s"] = { env = "align" },
     ["a"] = { env = "align*" },
 
     ["i"] = { env = "itemize" },
     ["n"] = { env = "enumerate" },
 
-    ["tt"] = { env = "Teo",  named = true },
-    ["tl"] = { env = "Lema", named = true },
-    ["td"] = { env = "Def",  named = true },
-    ["tc"] = { env = "Coro", named = true },
-    ["tp"] = { env = "Prop", named = true },
-    ["to"] = { env = "Obs",  named = true },
+    -- ["tt"] = { env = "Teo",  named = true },
+    -- ["tl"] = { env = "Lema", named = true },
+    -- ["td"] = { env = "Def",  named = true },
+    -- ["tc"] = { env = "Coro", named = true },
+    -- ["tp"] = { env = "Prop", named = true },
+    -- ["to"] = { env = "Obs",  named = true },
 
     ["m"] = { env = "bmatrix", condition = tex.in_math },
     ["c"] = { env = "cases", condition = tex.in_math },

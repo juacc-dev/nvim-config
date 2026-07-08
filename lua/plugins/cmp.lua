@@ -101,9 +101,10 @@ cmp.setup({
         { name = "luasnip", keyword_length = 2 },
         { name = "nvim_lsp" },
         -- { name = "cmp-vimtex", keyword_length = 2 },
-        { name = "buffer",  keyword_length = 4 },
-        { name = "path" },
-        { name = "nvim_lua" }, -- Lua for nvim
+        { name = "buffer",  keyword_length = 4 }, -- From text in the buffer
+        { name = "path" },                        -- From paths in filesystem
+        { name = "nvim_lua" },                    -- Lua for nvim
+        { name = "vimtex" },
     },
 
     formatting = {

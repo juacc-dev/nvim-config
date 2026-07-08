@@ -1,132 +1,15 @@
--- Common math stuff
+-- More complicated math snippets
 
 local tex = require("snippets.utils.tex")
 local utils = require("snippets.utils")
 
 
 return {
-    -- ##################### --
-    -- ## Static snippets ## --
-    -- ##################### --
-
-    -- Exists
-    s(
-        { trig = ".E", wordTrig = false, snippetType = "autosnippet", },
-        t([[\exists]]),
-        { condition = tex.in_math }
-    ),
-
-    -- Forall
-    s(
-        { trig = ".A", wordTrig = false, snippetType = "autosnippet", },
-        t([[\ \forall ]]),
-        { condition = tex.in_math }
-    ),
-
-    -- <=>
-    s(
-        { trig = ".=", wordTrig = false, snippetType = "autosnippet", },
-        t([[\iff]]),
-        { condition = tex.in_math }
-    ),
-
-    -- =>
-    s(
-        { trig = ".>", wordTrig = false, snippetType = "autosnippet", },
-        t([[\implies]]),
-        { condition = tex.in_math }
-    ),
-
-    -- <=
-    s(
-        { trig = ".<", wordTrig = false, snippetType = "autosnippet", },
-        t([[\impliedby]]),
-        { condition = tex.in_math }
-    ),
-
-    -- Infinity
-    s(
-        { trig = ".f", wordTrig = false, snippetType = "autosnippet", },
-        t([[\infty]]),
-        { condition = tex.in_math }
-    ),
-
-    -- Vector arrow
-    s(
-        { trig = ".v", wordTrig = false, snippetType = "autosnippet", },
-        t([[\vec ]]),
-        { condition = tex.in_math }
-    ),
-
-    -- Bold vector
-    s(
-        { trig = ".b", wordTrig = false, snippetType = "autosnippet", },
-        t([[\veb ]]),
-        { condition = tex.in_math }
-    ),
-
-    -- Dot product
-    s(
-        { trig = ".c", wordTrig = false, snippetType = "autosnippet" },
-        t([[\cdot]]),
-        { condition = tex.in_math }
-    ),
-
-    -- Cross / cartesian product
-    s(
-        { trig = ".x", wordTrig = false, snippetType = "autosnippet" },
-        t([[\times]]),
-        { condition = tex.in_math }
-    ),
-
-    -- Complex conjugate
-    -- s(
-    --     { trig = ".-", snippetType = "autosnippet", },
-    --     t([[\conj]]),
-    --     { condition = tex.in_math }
-    -- ),
-
-    -- Subset
-    s(
-        { trig = ".ss", wordTrig = false, snippetType = "autosnippet" },
-        t([[\subset]]),
-        { condition = tex.in_math }
-    ),
-
-    -- Dot derivative
-    s(
-        { trig = ".d", snippetType = "autosnippet", },
-        t([[\dot]]),
-        { condition = tex.in_math }
-    ),
-    s(
-        { trig = "..d", snippetType = "autosnippet", },
-        t([[\ddot]]),
-        { condition = tex.in_math }
-    ),
-
-    -- Partial derivative symbol
-    s(
-        { trig = ".p", snippetType = "autosnippet", },
-        t([[\partial]]),
-        { condition = tex.in_math }
-    ),
-
-    -- Nabla
-    s(
-        { trig = ".V", snippetType = "autosnippet", },
-        { t([[\nabla]]) },
-        { condition = tex.in_math }
-    ),
-
+    -- Integral
     s(
         { trig = ".I", snippetType = "autosnippet", },
         {
-            c(1, {
-                t([[\int]]),
-                t([[\iint]]),
-                t([[\iiint]]),
-            })
+            t([[\int]]),
         },
         { condition = tex.in_math }
     ),
@@ -140,72 +23,6 @@ return {
         }),
         { condition = tex.in_math }
     ),
-
-    -- Summation (sigma)
-    s(
-        { trig = ".S", snippetType = "autosnippet" },
-        t([[\sum]]),
-        { condition = tex.in_math }
-    ),
-
-    -- Product (pi)
-    s(
-        { trig = ".P", snippetType = "autosnippet" },
-        t([[\prod]]),
-        { condition = tex.in_math }
-    ),
-
-    -- Cool math typesetting
-    s(
-        { trig = ":M", wordTrig = false, snippetType = "autosnippet" },
-        t([[\mathbb ]]),
-        { condition = tex.in_math }
-    ),
-    s(
-        { trig = ":C", wordTrig = false, snippetType = "autosnippet" },
-        t([[\mathcal ]]),
-        { condition = tex.in_math }
-    ),
-
-    s(
-        { trig = ";h", wordTrig = false, snippetType = "autosnippet" },
-        t([[\hbar]]),
-        { condition = tex.in_math }
-    ),
-
-    s(
-        { trig = ",x", wordTrig = false, snippetType = "autosnippet" },
-        t([[\hat ]]),
-        { condition = tex.in_math }
-    ),
-
-    s(
-        { trig = "v,b", wordTrig = false, snippetType = "autosnippet" },
-        fmta([[\braket{<>}{<>}]], { i(1), i(2) }),
-        { condition = tex.in_math }
-    ),
-
-    s(
-        { trig = "b,v", wordTrig = false, snippetType = "autosnippet" },
-        fmta([[\ketbra{<>}{<>}]], { i(1), i(2) }),
-        { condition = tex.in_math }
-    ),
-
-    s(
-        { trig = ",v", wordTrig = false, snippetType = "autosnippet" },
-        fmta([[\bra{<>}]], { i(1) }),
-        { condition = tex.in_math }
-    ),
-
-    s(
-        { trig = ",b", wordTrig = false, snippetType = "autosnippet" },
-        fmta([[\ket{<>}]], { i(1) }),
-        { condition = tex.in_math }
-    ),
-
-    -- ########################## --
-    -- ## Completable snippets ## --
-    -- ########################## --
 
     -- Evaluated at...
     s(
@@ -394,6 +211,30 @@ return {
     s(
         { trig = "/l", snippetType = "autosnippet" },
         fmta([[\lim_{<>\to <>} ]], { i(1), i(2, "\\infty") }),
+        { condition = tex.in_math }
+    ),
+
+    s(
+        { trig = "v,b", wordTrig = false, snippetType = "autosnippet" },
+        fmta([[\braket{<>}{<>}]], { i(1), i(2) }),
+        { condition = tex.in_math }
+    ),
+
+    s(
+        { trig = "b,v", wordTrig = false, snippetType = "autosnippet" },
+        fmta([[\ketbra{<>}{<>}]], { i(1), i(2) }),
+        { condition = tex.in_math }
+    ),
+
+    s(
+        { trig = ",v", wordTrig = false, snippetType = "autosnippet" },
+        fmta([[\bra{<>}]], { i(1) }),
+        { condition = tex.in_math }
+    ),
+
+    s(
+        { trig = ",b", wordTrig = false, snippetType = "autosnippet" },
+        fmta([[\ket{<>}]], { i(1) }),
         { condition = tex.in_math }
     ),
 }
